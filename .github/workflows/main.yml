@@ -11,5 +11,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}
+
     steps:
       - run: echo 'The secret is ${{ secrets.SECRET }}'
+      - run: docker login -u token -p ${{ github.token }}
+      - run: docker pull alpine
+      - run: docker tag alpine ${{ env.IMAGE }} 
+      - run: docker push ${{ env.IMAGE }} 
