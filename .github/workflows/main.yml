@@ -17,6 +17,5 @@ jobs:
     steps:
       - run: echo 'The secret is ${{ secrets.SECRET }}'
       - run: docker login ghcr.io -u token -p ${{ github.token }}
-      - run: docker pull alpine
-      - run: docker tag alpine ${{ env.IMAGE }} 
+      - run: docker pull ${{ env.IMAGE }} 
       - run: docker push ${{ env.IMAGE }} 
